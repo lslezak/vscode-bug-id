@@ -1,71 +1,86 @@
-# bugzilla-id README
+# VSCode Bug ID Extension
 
-This is the README for your extension "bugzilla-id". After writing up a brief description, we recommend including the following sections.
+This is an extension for the [Visual Studio
+Code](https://code.visualstudio.com/) (VSCode) IDE.
+
+It shows bug details when placing the mouse cursor over a bug
+identifier.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Highlighting of the bug IDs in the text (underlined).
+- Displays a tooltip with bug details and a link pointing to the bug
+  tracking system to see more details.
+- It works in all files, documentation, source code, change log...
 
-For example if there is an image subfolder under your extension project workspace:
+## Supported bug identifiers
 
-\!\[feature X\]\(images/feature-x.png\)
+| Identifier                 | Bug tracking system                                      | Notes                                                 |
+| -------------------------- | -------------------------------------------------------- | ----------------------------------------------------- |
+| `gh#<org>/<repo>#<number>` | [GitHub](https://github.com) issues                      |                                                       |
+| `bsc#<number>`             | [SUSE Bugzilla](https://bugzilla.suse.com)               | Shared with openSUSE bugzilla                         |
+| `boo#<number>`             | [openSUSE Bugzilla](https://bugzilla.opensuse.org)       | Shared with SUSE bugzilla                             |
+| `bnc#<number>`             | Novell Bugzilla                                          | Not available anymore, redirects to the SUSE bugzilla |
+| `GCC#<number>`             | [GCC Bugzilla](https://gcc.gnu.org/bugzilla)             |                                                       |
+| `bko#<number>`             | [Linux Kernel Bugzilla](https://bugzilla.kernel.org)     |                                                       |
+| `bmo#<number>`             | [Mozilla Bugzilla](https://bugzilla.mozilla.org)         |                                                       |
+| `kde#<number>`             | [KDE Bugzilla](https://bugs.kde.org)                     |                                                       |
+| `rh#<number>`              | [Redhat Bugzilla](https://bugzilla.redhat.com)           |                                                       |
+| `poo#<number>`             | [openSUSE Progress issue](https://progress.opensuse.org) |                                                       |
+| `jsc#<ID>`                 | [SUSE Jira](https://jira.suse.com/)                      |                                                       |
+| `CVE-<year>-<number>`      | [NIST vulnerability database](https://nvd.nist.gov)      |                                                       |
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+For more details see the list of [abbreviations used in
+openSUSE](https://en.opensuse.org/openSUSE:Packaging_Patches_guidelines#Current_set_of_abbreviations).
 
-## Requirements
+## Authentication
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Some systems or bugs can be accessed anonymously without any authentication.
+However, authentication might increase the allowed request rate limit.
+
+### GitHub
+
+Anonymous access to GitHub API allows 60 requests per hour. Limit for the
+authenticated requests is 5000 requests per hour.
+
+To authenticate to GitHub click the "Sign in to GitHub" link displayed in the
+warning message displayed when reaching the limit for anonymous requests. Or you
+can authenticate anytime by opening the command palette (`Ctrl+Shift+P`) and
+selecting the "*Bug ID: Request GitHub authentication*" command. When asked
+confirm the access to GitHub for the extension.
+
+### Bugzilla
+
+Bugzilla systems in general allow anonymous access, but some bug reports require
+authentication. And some bugs might be accessible only to specific persons or
+teams. For example the security bugs might be accessible only to the security
+team.
+
+To create an API key and import it to the extension settings just click the
+displayed links for a Bugzilla identifier.
+
+Or go to the Bugzilla preferences page, click your account name at the top of
+the page and select the "*Preferences*" option. Switch to the "*API KEYS*" tab
+and create a new API key. Then go to the extension settings (see below) and
+paste the created API key to the appropriate Bugzilla system setting.
+
+### SUSE Jira
+
+SUSE Jira requires authenticated access. To create an API key and import it to
+the extension settings click the displayed links for a Jira issue identifier.
+
+Alternatively open your user profile page in Jira and select the "*Personal
+Access Tokens*" item in the left menu and then click the "*Create token*" button
+in the top right corner. Then go to the extension settings (see below) and paste
+the created API key into the Jira setting.
+
+### NIST CVE
+
+Anonymous access allows 5 requests during 30 seconds. Authenticated access is
+not supported.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+The API tokens are stored in the extension settings. To display and the
+extension settings open the VSCode setting panel (`Ctrl+,`) and navigate to the
+`Extensions -> Bug ID` section.

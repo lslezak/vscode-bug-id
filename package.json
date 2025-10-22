@@ -1,13 +1,13 @@
 {
-  "name": "bugzilla-id",
-  "displayName": "Bugzilla ID",
-  "description": "Show details about bugzilla IDs",
+  "name": "bug-id",
+  "displayName": "Bug ID",
+  "description": "Show details about bug IDs",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lslezak/vscode-bugzilla-id.git"
+    "url": "https://github.com/lslezak/vscode-bug-id.git"
   },
-  "homepage": "https://github.com/lslezak/vscode-bugzilla-id",
+  "homepage": "https://github.com/lslezak/vscode-bug-id",
   "publisher": "lslezak",
   "engines": {
     "vscode": "^1.105.0"
@@ -15,13 +15,24 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "onLanguage"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "bugzilla-id.helloWorld",
-        "title": "Hello World"
+        "command": "bug-id.authenticate.github",
+        "title": "Bug ID: Request GitHub authentication"
+      },
+      {
+        "command": "bug-id.token.manager",
+        "title": "Bug ID: Manage API tokens"
+      },
+      {
+        "command": "bug-id.suse.token.manager",
+        "title": "Bug ID: Manage SUSE Bugzilla API token"
       }
     ]
   },
@@ -37,19 +48,23 @@
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
+    "lint:fix": "eslint --fix src/",
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.105.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
+    "@types/vscode": "^1.105.0",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
-    "eslint": "^9.36.0",
-    "esbuild": "^0.25.10",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.9.3",
     "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.25.10",
+    "eslint": "^9.36.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0"
   }
 }

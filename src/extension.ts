@@ -1,26 +1,79 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
+import { updateHovers } from "./lib/hover";
+import { allProviders } from "./lib/providers";
+import { requestAuthentication } from "./lib/githubAuthentication";
+import { selectToken, setToken } from "./lib/tokenManager";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+  let activeEditor = vscode.window.activeTextEditor;
+  // delay updating the diagnostics if the document is changing too quickly
+  let timeout: NodeJS.Timeout | undefined = undefined;
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "bugzilla-id" is now active!');
+  registerCommands(context);
+  registerProviders(context);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('bugzilla-id.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from bugzilla-id!');
-	});
+  if (activeEditor) {
+    updateHovers(activeEditor);
+  }
 
-	context.subscriptions.push(disposable);
+  context.subscriptions.push(
+    vscode.window.onDidChangeActiveTextEditor((editor) => {
+      activeEditor = editor;
+
+      if (activeEditor) {
+        updateHovers(activeEditor);
+      }
+    })
+  );
+
+  vscode.workspace.onDidChangeTextDocument(
+    (event) => {
+      // a change in the active document, postpone the validation to
+      // avoid too many expensive updates when the user is typing very quickly
+      if (activeEditor && event.document === activeEditor.document) {
+        // if there already is a pending decoration then cancel it
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+        // schedule a new decoration
+        timeout = setTimeout(() => activeEditor && updateHovers(activeEditor), 500);
+      }
+    },
+    null,
+    context.subscriptions
+  );
 }
 
-// This method is called when your extension is deactivated
+// called when the extension is deactivated
 export function deactivate() {}
+
+// register all hover providers
+function registerProviders(context: vscode.ExtensionContext) {
+  allProviders().forEach((provider) => {
+    const disposable = vscode.languages.registerHoverProvider(
+      // apply to all files
+      { pattern: "**/*" },
+      provider
+    );
+    context.subscriptions.push(disposable);
+  });
+}
+
+// register the GitHub authentication command
+function registerCommands(context: vscode.ExtensionContext) {
+  let disposable = vscode.commands.registerCommand(
+    "bug-id.authenticate.github",
+    requestAuthentication
+  );
+  context.subscriptions.push(disposable);
+
+  disposable = vscode.commands.registerCommand("bug-id.token.manager", () => selectToken(context));
+  context.subscriptions.push(disposable);
+
+  disposable = vscode.commands.registerCommand("bug-id.suse.token.manager", () =>
+    setToken("SUSE Bugzilla", "suse.token", context)
+  );
+  context.subscriptions.push(disposable);
+}

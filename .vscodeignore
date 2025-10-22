@@ -7,6 +7,8 @@ src/**
 .yarnrc
 esbuild.js
 vsc-extension-quickstart.md
+media/icon.svg
+examples.md
 **/tsconfig.json
 **/eslint.config.mjs
 **/*.map
