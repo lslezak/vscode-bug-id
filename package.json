@@ -1,13 +1,13 @@
 {
-  "name": "bugzilla-id",
-  "displayName": "Bugzilla ID",
-  "description": "Show details about bugzilla IDs",
+  "name": "bug-id",
+  "displayName": "Bug ID",
+  "description": "Show details about bug IDs",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lslezak/vscode-bugzilla-id.git"
+    "url": "https://github.com/lslezak/vscode-bug-id.git"
   },
-  "homepage": "https://github.com/lslezak/vscode-bugzilla-id",
+  "homepage": "https://github.com/lslezak/vscode-bug-id",
   "publisher": "lslezak",
   "engines": {
     "vscode": "^1.105.0"
@@ -15,16 +15,11 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./dist/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "bugzilla-id.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
+  "contributes": {},
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "npm run check-types && npm run lint && node esbuild.js",
@@ -51,5 +46,8 @@
     "typescript": "^5.9.3",
     "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.5.2"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0"
   }
 }
