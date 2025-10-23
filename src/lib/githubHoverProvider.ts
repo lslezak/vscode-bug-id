@@ -4,6 +4,10 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 export class GitHubHoverProvider implements vscode.HoverProvider {
   public static readonly regexp = /\bgh#(\S+)#([0-9]+)\b/g;
 
+  public static link(match: RegExpExecArray): string {
+    return `https://github.com/${match[1]}/issues/${match[2]}`;
+  }
+
   public async provideHover(
     document: vscode.TextDocument,
     position: vscode.Position,

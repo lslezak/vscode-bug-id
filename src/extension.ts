@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { updateHovers } from "./lib/hover";
 import { GitHubHoverProvider } from "./lib/githubHoverProvider";
+import { BugzillaHoverProvider } from "./lib/bugzillaHoverProvider";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -12,9 +13,15 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.languages.registerHoverProvider(
     // apply to all files
     { pattern: "**/*" },
-		new GitHubHoverProvider()
+    new GitHubHoverProvider()
   );
+  context.subscriptions.push(disposable);
 
+	disposable = vscode.languages.registerHoverProvider(
+    // apply to all files
+    { pattern: "**/*" },
+    new BugzillaHoverProvider()
+  );
   context.subscriptions.push(disposable);
 
   if (activeEditor) {
@@ -41,10 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
           clearTimeout(timeout);
         }
         // schedule a new decoration
-        timeout = setTimeout(
-          () => activeEditor && updateHovers(activeEditor),
-          500
-        );
+        timeout = setTimeout(() => activeEditor && updateHovers(activeEditor), 500);
       }
     },
     null,
