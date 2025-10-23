@@ -10,19 +10,15 @@ export function activate(context: vscode.ExtensionContext) {
   // delay updating the diagnostics if the document is changing too quickly
   let timeout: NodeJS.Timeout | undefined = undefined;
 
-  let disposable = vscode.languages.registerHoverProvider(
-    // apply to all files
-    { pattern: "**/*" },
-    new GitHubHoverProvider()
-  );
-  context.subscriptions.push(disposable);
-
-	disposable = vscode.languages.registerHoverProvider(
-    // apply to all files
-    { pattern: "**/*" },
-    new BugzillaHoverProvider()
-  );
-  context.subscriptions.push(disposable);
+  const providers = [GitHubHoverProvider, BugzillaHoverProvider];
+  providers.forEach((provider) => {
+    const disposable = vscode.languages.registerHoverProvider(
+      // apply to all files
+      { pattern: "**/*" },
+      new provider()
+    );
+    context.subscriptions.push(disposable);
+  });
 
   if (activeEditor) {
     updateHovers(activeEditor);

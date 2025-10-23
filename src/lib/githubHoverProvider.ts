@@ -18,6 +18,7 @@ export class GitHubHoverProvider implements vscode.HoverProvider {
       const word = document.getText(range);
       const match = GitHubHoverProvider.regexp.exec(word);
       if (match) {
+        // we do not know whether it is an issue or pull request but the issue URL works for both
         const response = await fetch(`https://api.github.com/repos/${match[1]}/issues/${match[2]}`);
         this.checkRateLimit(response);
         return this.createHoverMessage(response);
@@ -30,12 +31,11 @@ export class GitHubHoverProvider implements vscode.HoverProvider {
     const message = new vscode.MarkdownString();
     if (response.ok) {
       const data: any = await response.json();
+      const type = data.pull_request ? "PR" : "Issue";
 
-      message.appendMarkdown(`## ${data.title}\n`);
-
-      if (data.body) {
-        message.appendMarkdown(`${data.body}\n---\n`);
-      }
+      message.appendMarkdown(`### [${type}#${data.number}](${data.html_url}) - `);
+      message.appendText(data.title);
+      message.appendMarkdown(`\n\n${data.body}\n---\n`);
 
       if (data.assignee) {
         message.appendMarkdown(`Assigned to *${data.assignee.login}*  \n`);
