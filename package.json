@@ -25,8 +25,8 @@
       "title": "Bug ID",
       "type": "object",
       "properties": {
-        "bug-id.bugzilla.suse.com.token": {
-          "markdownDescription": "API token for https://bugzilla.suse.com. Without token only the details of the publicly visible bugs can be displayed.  \nTo create a new API token go to the [Bugzilla preferences](https://bugzilla.suse.com/userprefs.cgi?tab=apikey) page.",
+        "bug-id.bugzilla.suse.token": {
+          "markdownDescription": "API token for https://bugzilla.opensuse.org or https://bugzilla.suse.com (they share the user accounts). Without token only the details of the publicly visible bugs can be displayed.  \nTo create a new API token go to the [Bugzilla preferences](https://bugzilla.opensuse.org/userprefs.cgi?tab=apikey) page.",
           "type": "string"
         }
       }

@@ -1,28 +1,40 @@
 import * as vscode from "vscode";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
+import { HoverProvider } from "./types";
+
 // spacing used in the Markdown texts
 const s = " &nbsp; ";
 
 // @staticImplements<HoverMatcherStatic>()
-export class BugzillaHoverProvider implements vscode.HoverProvider {
-  public static readonly regexp = /\bbsc#([0-9]+)\b/g;
+export class BugzillaHoverProvider implements HoverProvider {
+  private baseUrl: string;
+  private regexp: RegExp;
+  private tokenId: string;
 
-  public static link(match: RegExpExecArray): string {
-    return "https://bugzilla.suse.com/show_bug.cgi?id=" + match[1];
+  constructor(base: string, matcher: RegExp, config: string) {
+    this.baseUrl = base;
+    this.regexp = matcher;
+    this.tokenId = config;
   }
 
-  private static readonly baseUrl = "https://bugzilla.suse.com";
+  link(match: RegExpExecArray): string {
+    return `${this.baseUrl}/show_bug.cgi?id=${match[1]}`;
+  }
 
-  public async provideHover(
+  regExp(): RegExp {
+    return this.regexp;
+  }
+
+  async provideHover(
     document: vscode.TextDocument,
     position: vscode.Position,
     token: vscode.CancellationToken
   ): Promise<vscode.Hover | null> {
-    const range = document.getWordRangeAtPosition(position, BugzillaHoverProvider.regexp);
+    const range = document.getWordRangeAtPosition(position, this.regexp);
     if (range) {
       const word = document.getText(range);
-      const match = BugzillaHoverProvider.regexp.exec(word);
+      const match = this.regexp.exec(word);
       if (match) {
         const bug = await fetch(this.createApiUrl(`bug/${match[1]}`));
         const comments = await fetch(this.createApiUrl(`bug/${match[1]}/comment`));
@@ -45,7 +57,7 @@ export class BugzillaHoverProvider implements vscode.HoverProvider {
       const bug = data.bugs?.[0];
       if (bug) {
         message.appendMarkdown(
-          `### [Bug#${bug.id}](https://bugzilla.suse.com/show_bug.cgi?id=${bug.id}) - `
+          `### [Bug#${bug.id}](${this.baseUrl}/show_bug.cgi?id=${bug.id}) - `
         );
         message.appendText(bug.summary);
         message.appendMarkdown(
@@ -84,8 +96,8 @@ export class BugzillaHoverProvider implements vscode.HoverProvider {
 
   private createApiUrl(endPoint: string): string {
     const configuration = vscode.workspace.getConfiguration("bug-id");
-    const token = configuration.get<string>("bugzilla.suse.com.token");
-    const url = BugzillaHoverProvider.baseUrl + "/rest/" + endPoint;
+    const token = configuration.get<string>(this.tokenId);
+    const url = this.baseUrl + "/rest/" + endPoint;
 
     return token && token !== "" ? url + "?api_key=" + encodeURIComponent(token) : url;
   }

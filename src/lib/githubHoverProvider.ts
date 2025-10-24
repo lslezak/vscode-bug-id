@@ -1,10 +1,16 @@
 import * as vscode from "vscode";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-export class GitHubHoverProvider implements vscode.HoverProvider {
-  public static readonly regexp = /\bgh#(\S+)#([0-9]+)\b/g;
+import { HoverProvider } from "./types";
 
-  public static link(match: RegExpExecArray): string {
+export class GitHubHoverProvider implements HoverProvider {
+  private readonly regexp = /\bgh#(\S+)#([0-9]+)\b/g;
+
+  regExp(): RegExp {
+    return this.regexp;
+  }
+
+  link(match: RegExpExecArray): string {
     return `https://github.com/${match[1]}/issues/${match[2]}`;
   }
 
@@ -13,10 +19,10 @@ export class GitHubHoverProvider implements vscode.HoverProvider {
     position: vscode.Position,
     token: vscode.CancellationToken
   ): Promise<vscode.Hover | null> {
-    const range = document.getWordRangeAtPosition(position, GitHubHoverProvider.regexp);
+    const range = document.getWordRangeAtPosition(position, this.regexp);
     if (range) {
       const word = document.getText(range);
-      const match = GitHubHoverProvider.regexp.exec(word);
+      const match = this.regexp.exec(word);
       if (match) {
         // we do not know whether it is an issue or pull request but the issue URL works for both
         const response = await fetch(`https://api.github.com/repos/${match[1]}/issues/${match[2]}`);

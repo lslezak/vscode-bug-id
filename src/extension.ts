@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import { updateHovers } from "./lib/hover";
-import { GitHubHoverProvider } from "./lib/githubHoverProvider";
-import { BugzillaHoverProvider } from "./lib/bugzillaHoverProvider";
+import { allProviders } from "./lib/providers";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -10,12 +9,11 @@ export function activate(context: vscode.ExtensionContext) {
   // delay updating the diagnostics if the document is changing too quickly
   let timeout: NodeJS.Timeout | undefined = undefined;
 
-  const providers = [GitHubHoverProvider, BugzillaHoverProvider];
-  providers.forEach((provider) => {
+  allProviders().forEach((provider) => {
     const disposable = vscode.languages.registerHoverProvider(
       // apply to all files
       { pattern: "**/*" },
-      new provider()
+      provider
     );
     context.subscriptions.push(disposable);
   });

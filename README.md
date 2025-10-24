@@ -17,18 +17,21 @@ bug identifier displayed in the editor.
 
 | Identifier | Bug tracker | URL Link |
 | --- | --- | --- |
-| `gh#<org>/<repo>#<number>` | GitHub issues | `https://github.com/<org>/<repo>/issues/<number>` |
+| `gh#<org>/<repo>#<number>` | [GitHub](https://gituhb.com) issues | `https://github.com/<org>/<repo>/issues/<number>` |
 | `bsc#<number>` | [SUSE Bugzilla](https://bugzilla.suse.com) | `https://bugzilla.suse.com/show_bug.cgi?id=<number>` |
+| `boo#<number>` | [openSUSE Bugzilla](https://bugzilla.opensuse.org) | `https://bugzilla.opensuse.org/show_bug.cgi?id=<number>` |
 
 ## Extension Settings
 
 This extension uses these settings:
 
-- `bug-id.bugzilla.suse.com.token`: The API token for accessing the [SUSE
-  Bugzilla](https://bugzilla.suse.com). Without a token only the details of the
-  publicly visible bugs can be displayed. To create a new API token go to the
-  [Bugzilla preferences](https://bugzilla.suse.com/userprefs.cgi?tab=apikey)
-  page.
+- `bug-id.bugzilla.suse.token`: The API token for accessing the [openSUSE
+  Bugzilla](https://bugzilla.opensuse.org) or [SUSE
+  Bugzilla](https://bugzilla.suse.com) (they share the user accounts).  
+  Without a token only the details of the
+  publicly visible bugs can be displayed.  
+  To create a new API token go to the [Bugzilla
+  preferences](https://bugzilla.opensuse.org/userprefs.cgi?tab=apikey) page.
 
 Just go to the settings configuration in VSCode (`Ctrl + ,`) and navigate to the
 `Extensions -> Bug ID` section.

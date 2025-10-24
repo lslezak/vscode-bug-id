@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 
-import { GitHubHoverProvider } from "./githubHoverProvider";
-import { BugzillaHoverProvider } from "./bugzillaHoverProvider";
+import { allProviders } from "./providers";
 
 // const channel = vscode.window.createOutputChannel("My channel");
 // channel.show();
@@ -11,8 +10,6 @@ const decorationType = vscode.window.createTextEditorDecorationType({
   borderStyle: "none none solid none",
   borderWidth: "1px",
 });
-
-const providers = [GitHubHoverProvider, BugzillaHoverProvider];
 
 export function updateHovers(editor: vscode.TextEditor) {
   const document = editor.document;
@@ -25,8 +22,8 @@ export function updateHovers(editor: vscode.TextEditor) {
 
   let match: RegExpExecArray | null;
 
-  providers.forEach((provider) => {
-    while ((match = provider.regexp.exec(text))) {
+  allProviders().forEach((provider) => {
+    while ((match = provider.regExp().exec(text))) {
       const startPos = document.positionAt(match.index);
       const endPos = document.positionAt(match.index + match[0].length);
       const decoration: vscode.DecorationOptions = {
