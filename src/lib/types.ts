@@ -1,6 +1,9 @@
 import * as vscode from "vscode";
 
 export interface HoverProvider extends vscode.HoverProvider {
-  link(match: RegExpExecArray): string;
+  // return regexp for matching the bug ID
   regExp(): RegExp;
+  // create an URL link for the matched bug ID, the "match" parameter
+  // is the result of matching the "regexp()" against the text
+  link(match: RegExpExecArray): string;
 }

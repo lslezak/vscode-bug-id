@@ -44,22 +44,26 @@ export class GitHubHoverProvider implements HoverProvider {
       message.appendMarkdown(`\n\n${data.body}\n---\n`);
 
       if (data.assignee) {
-        message.appendMarkdown(`Assigned to *${data.assignee.login}*  \n`);
+        message.appendMarkdown(`Assigned to **${data.assignee.login}**  \n`);
       }
 
       const createDate = new Date(data.created_at);
       message.appendMarkdown(
-        `Created by *${data.user.login}* ${formatDistanceToNow(createDate, {
+        `Created by **${
+          data.user.login
+        }** on ${createDate.toLocaleString()}, **${formatDistanceToNow(createDate, {
           addSuffix: true,
-        })} on *${createDate.toLocaleString()}*  \n`
+        })}**   \n`
       );
 
       if (data.closed_at) {
         const closeDate = new Date(data.closed_at);
         message.appendMarkdown(
-          `Closed by *${data.closed_by.login}* ${formatDistanceToNow(closeDate, {
+          `Closed by **${
+            data.closed_by.login
+          }** on ${closeDate.toLocaleString()}, **${formatDistanceToNow(closeDate, {
             addSuffix: true,
-          })} on *${closeDate.toLocaleString()}*  \n`
+          })}**  \n`
         );
       }
     } else {

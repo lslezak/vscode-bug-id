@@ -26,7 +26,27 @@
       "type": "object",
       "properties": {
         "bug-id.bugzilla.suse.token": {
-          "markdownDescription": "API token for https://bugzilla.opensuse.org or https://bugzilla.suse.com (they share the user accounts). Without token only the details of the publicly visible bugs can be displayed.  \nTo create a new API token go to the [Bugzilla preferences](https://bugzilla.opensuse.org/userprefs.cgi?tab=apikey) page.",
+          "markdownDescription": "API token for [openSUSE](https://bugzilla.opensuse.org) or [SUSE](https://bugzilla.suse.com) Bugzilla (they share the user accounts). To create a new API token go to the openSUSE Bugzilla [preferences](https://bugzilla.opensuse.org/userprefs.cgi?tab=apikey) page.",
+          "type": "string"
+        },
+        "bug-id.bugzilla.gcc.token": {
+          "markdownDescription": "API token for [GCC Bugzilla](https://gcc.gnu.org/bugzilla). To create a new API token go to the Bugzilla [preferences](https://gcc.gnu.org/bugzilla/userprefs.cgi?tab=apikey) page.",
+          "type": "string"
+        },
+        "bug-id.bugzilla.kernel.token": {
+          "markdownDescription": "API token for [Linux Kernel Bugzilla](https://bugzilla.kernel.org). To create a new API token go to the Bugzilla [preferences](https://bugzilla.kernel.org/userprefs.cgi?tab=apikey) page.",
+          "type": "string"
+        },
+        "bug-id.bugzilla.mozilla.token": {
+          "markdownDescription": "API token for [Mozilla Bugzilla](https://bugzilla.mozilla.org). To create a new API token go to the Bugzilla [preferences](https://bugzilla.mozilla.org/userprefs.cgi?tab=apikey) page.",
+          "type": "string"
+        },
+        "bug-id.bugzilla.kde.token": {
+          "markdownDescription": "API token for [KDE Bugzilla](https://bugs.kde.org). To create a new API token go to the Bugzilla [preferences](https://bugs.kde.org/userprefs.cgi?tab=apikey) page.",
+          "type": "string"
+        },
+        "bug-id.bugzilla.redhat.token": {
+          "markdownDescription": "API token for [Redhat Bugzilla](https://bugzilla.redhat.com). To create a new API token go to the Bugzilla [preferences](https://bugzilla.redhat.com/userprefs.cgi?tab=apikey) page.",
           "type": "string"
         }
       }

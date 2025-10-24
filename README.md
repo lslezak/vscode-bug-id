@@ -9,29 +9,31 @@ bug identifier displayed in the editor.
 ## Features
 
 - Highlighting of the bug IDs in the text (underlined).
-- On hover it displays a tooltip with bug details and a link pointing to the bug tracking system to
-  see more details.
+- On hover it displays a tooltip with bug details and a link pointing to the bug
+  tracking system to see more details.
 - It works in all files, documentation, source code, change log...
 
 ## Supported bug identifiers
 
-| Identifier | Bug tracker | URL Link |
+| Identifier | Bug tracking system | Notes|
 | --- | --- | --- |
-| `gh#<org>/<repo>#<number>` | [GitHub](https://gituhb.com) issues | `https://github.com/<org>/<repo>/issues/<number>` |
-| `bsc#<number>` | [SUSE Bugzilla](https://bugzilla.suse.com) | `https://bugzilla.suse.com/show_bug.cgi?id=<number>` |
-| `boo#<number>` | [openSUSE Bugzilla](https://bugzilla.opensuse.org) | `https://bugzilla.opensuse.org/show_bug.cgi?id=<number>` |
+| `gh#<org>/<repo>#<number>` | [GitHub](https://gituhb.com) issues | |
+| `bsc#<number>` | [SUSE Bugzilla](https://bugzilla.suse.com) | Shared with openSUSE bugzilla |
+| `boo#<number>` | [openSUSE Bugzilla](https://bugzilla.opensuse.org) | Shared with SUSE bugzilla |
+| `bnc#<number>` | Novell Bugzilla (down) | Not available anymore, redirects to the SUSE bugzilla |
+| `GCC#<number>` | [GCC Bugzilla](https://gcc.gnu.org/bugzilla) | |
+| `bko#<number>` | [Linux Kernel Bugzilla](https://bugzilla.kernel.org) | |
+| `bmo#<number>` | [Mozilla Bugzilla](https://bugzilla.mozilla.org) | |
+| `kde#<number>` | [KDE Bugzilla](https://bugs.kde.org) | |
+| `rh#<number>`  | [Redhat Bugzilla](https://bugzilla.redhat.com) | |
+| `bso#<number>` | [Samba Bugzilla](https://bugzilla.samba.org) | Loading bug details does not work |
+| `bgo#<number>` | [GNOME Bugzilla](https://bugzilla.gnome.org) (obsolete) | Loading bug details does not work |
 
 ## Extension Settings
 
-This extension uses these settings:
+The access API token for Bugzilla based bug tracking systems can be added in the
+extension settings. Without API token only the details of the publicly visible
+bugs can be displayed.
 
-- `bug-id.bugzilla.suse.token`: The API token for accessing the [openSUSE
-  Bugzilla](https://bugzilla.opensuse.org) or [SUSE
-  Bugzilla](https://bugzilla.suse.com) (they share the user accounts).  
-  Without a token only the details of the
-  publicly visible bugs can be displayed.  
-  To create a new API token go to the [Bugzilla
-  preferences](https://bugzilla.opensuse.org/userprefs.cgi?tab=apikey) page.
-
-Just go to the settings configuration in VSCode (`Ctrl + ,`) and navigate to the
+Go to the settings configuration in VSCode (`Ctrl + ,`) and navigate to the
 `Extensions -> Bug ID` section.
