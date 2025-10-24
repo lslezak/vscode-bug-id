@@ -17,7 +17,7 @@
   ],
   "icon": "media/icon.png",
   "activationEvents": [
-    "*"
+    "onLanguage"
   ],
   "main": "./dist/extension.js",
   "contributes": {
