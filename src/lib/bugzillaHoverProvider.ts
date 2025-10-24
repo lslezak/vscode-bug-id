@@ -6,7 +6,6 @@ import { HoverProvider } from "./types";
 // spacing used in the Markdown texts
 const s = " &nbsp; ";
 
-// @staticImplements<HoverMatcherStatic>()
 export class BugzillaHoverProvider implements HoverProvider {
   private baseUrl: string;
   private regexp: RegExp;

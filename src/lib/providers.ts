@@ -1,11 +1,13 @@
 import { GitHubHoverProvider } from "./githubHoverProvider";
 import { BugzillaHoverProvider } from "./bugzillaHoverProvider";
+import { ProgressHoverProvider } from "./progressHoverProvider";
 
 import { HoverProvider } from "./types";
 
 export function allProviders(): HoverProvider[] {
   return [
     new GitHubHoverProvider(),
+    new ProgressHoverProvider(),
     // SUSE bugzilla
     new BugzillaHoverProvider(
       "https://bugzilla.suse.com",

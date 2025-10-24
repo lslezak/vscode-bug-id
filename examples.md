@@ -25,6 +25,7 @@ Other systems:
 
 - GitHub issues: gh#agama-project/agama#1894 gh#openSUSE/zypper#622 (pull
   request) gh#openSUSE/zypper#560 (issue)
+- Progress openSUSE: poo#189702 (loading details not implemented)
 
 ## Examples which require API key
 

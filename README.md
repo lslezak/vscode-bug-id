@@ -17,7 +17,7 @@ bug identifier displayed in the editor.
 
 | Identifier | Bug tracking system | Notes|
 | --- | --- | --- |
-| `gh#<org>/<repo>#<number>` | [GitHub](https://gituhb.com) issues | |
+| `gh#<org>/<repo>#<number>` | [GitHub](https://github.com) issues | |
 | `bsc#<number>` | [SUSE Bugzilla](https://bugzilla.suse.com) | Shared with openSUSE bugzilla |
 | `boo#<number>` | [openSUSE Bugzilla](https://bugzilla.opensuse.org) | Shared with SUSE bugzilla |
 | `bnc#<number>` | Novell Bugzilla (down) | Not available anymore, redirects to the SUSE bugzilla |
@@ -28,6 +28,7 @@ bug identifier displayed in the editor.
 | `rh#<number>`  | [Redhat Bugzilla](https://bugzilla.redhat.com) | |
 | `bso#<number>` | [Samba Bugzilla](https://bugzilla.samba.org) | Loading bug details does not work |
 | `bgo#<number>` | [GNOME Bugzilla](https://bugzilla.gnome.org) (obsolete) | Loading bug details does not work |
+| `poo#<number>` | [Progress openSUSE](https://progress.opensuse.org) | Loading details not implemented |
 
 ## Extension Settings
 
