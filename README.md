@@ -26,9 +26,10 @@ bug identifier displayed in the editor.
 | `bmo#<number>` | [Mozilla Bugzilla](https://bugzilla.mozilla.org) | |
 | `kde#<number>` | [KDE Bugzilla](https://bugs.kde.org) | |
 | `rh#<number>`  | [Redhat Bugzilla](https://bugzilla.redhat.com) | |
-| `bso#<number>` | [Samba Bugzilla](https://bugzilla.samba.org) | Loading bug details does not work |
-| `bgo#<number>` | [GNOME Bugzilla](https://bugzilla.gnome.org) (obsolete) | Loading bug details does not work |
 | `poo#<number>` | [Progress openSUSE](https://progress.opensuse.org) | Loading details not implemented |
+
+For more details see the list of [abbreviations used in
+openSUSE](https://en.opensuse.org/openSUSE:Packaging_Patches_guidelines#Current_set_of_abbreviations).
 
 ## Extension Settings
 

@@ -26,6 +26,7 @@ Other systems:
 - GitHub issues: gh#agama-project/agama#1894 gh#openSUSE/zypper#622 (pull
   request) gh#openSUSE/zypper#560 (issue)
 - Progress openSUSE: poo#189702 (loading details not implemented)
+- CVE: CVE-2025-39678 CVE-2025-39746 CVE-2019-3700
 
 ## Examples which require API key
 
@@ -33,12 +34,3 @@ These examples need an API key with appropriate access permission otherwise
 fetching the data fails.
 
 - SUSE bugzilla: bsc#1248276
-
-## Broken examples
-
-These bugzilla systems do not response properly for the REST API requests
-so the details are not displayed. But clicking the URL link works fine
-and opens the bug report in the web browser correctly.
-
-- Gnome bugzilla examples: bgo#95893
-- Samba bugzilla examples: bso#15903 bso#13291

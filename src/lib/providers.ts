@@ -1,6 +1,7 @@
 import { GitHubHoverProvider } from "./githubHoverProvider";
 import { BugzillaHoverProvider } from "./bugzillaHoverProvider";
 import { ProgressHoverProvider } from "./progressHoverProvider";
+import { CveHoverProvider } from "./cveHoverProvider";
 
 import { HoverProvider } from "./types";
 
@@ -8,6 +9,7 @@ export function allProviders(): HoverProvider[] {
   return [
     new GitHubHoverProvider(),
     new ProgressHoverProvider(),
+    new CveHoverProvider(),
     // SUSE bugzilla
     new BugzillaHoverProvider(
       "https://bugzilla.suse.com",
@@ -33,12 +35,6 @@ export function allProviders(): HoverProvider[] {
       /\bGCC#([0-9]+)\b/g,
       "bugzilla.gcc.token"
     ),
-    // GNOME bugzilla (REST API does not work)
-    new BugzillaHoverProvider(
-      "https://bugzilla.gnome.org",
-      /\bbgo#([0-9]+)\b/g,
-      "bugzilla.gnome.token"
-    ),
     // KDE bugzilla
     new BugzillaHoverProvider(
       "https://bugs.kde.org",
@@ -62,12 +58,6 @@ export function allProviders(): HoverProvider[] {
       "https://bugzilla.redhat.com",
       /\brh#([0-9]+)\b/g,
       "bugzilla.redhat.token"
-    ),
-    // Samba bugzilla (REST API does not work)
-    new BugzillaHoverProvider(
-      "https://bugzilla.samba.org",
-      /\bbso#([0-9]+)\b/g,
-      "bugzilla.samba.token"
     ),
   ];
 }
