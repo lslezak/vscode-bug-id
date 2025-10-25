@@ -1,7 +1,8 @@
-import { GitHubHoverProvider } from "./githubHoverProvider";
 import { BugzillaHoverProvider } from "./bugzillaHoverProvider";
-import { ProgressHoverProvider } from "./progressHoverProvider";
 import { CveHoverProvider } from "./cveHoverProvider";
+import { GitHubHoverProvider } from "./githubHoverProvider";
+import { JiraHoverProvider } from "./jiraHoverProvider";
+import { ProgressHoverProvider } from "./progressHoverProvider";
 
 import { HoverProvider } from "./types";
 
@@ -10,6 +11,7 @@ export function allProviders(): HoverProvider[] {
     new GitHubHoverProvider(),
     new ProgressHoverProvider(),
     new CveHoverProvider(),
+    new JiraHoverProvider(),
     // SUSE bugzilla
     new BugzillaHoverProvider(
       "https://bugzilla.suse.com",

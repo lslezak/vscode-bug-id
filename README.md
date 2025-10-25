@@ -26,7 +26,8 @@ bug identifier displayed in the editor.
 | `bmo#<number>` | [Mozilla Bugzilla](https://bugzilla.mozilla.org) | |
 | `kde#<number>` | [KDE Bugzilla](https://bugs.kde.org) | |
 | `rh#<number>`  | [Redhat Bugzilla](https://bugzilla.redhat.com) | |
-| `poo#<number>` | [Progress openSUSE](https://progress.opensuse.org) | Loading details not implemented |
+| `poo#<number>` | [openSUSE Progress issue](https://progress.opensuse.org) | Loading details not implemented |
+| `jsc#<ID>`     | [SUSE Jira](https://jira.suse.com/) | Loading details not implemented |
 
 For more details see the list of [abbreviations used in
 openSUSE](https://en.opensuse.org/openSUSE:Packaging_Patches_guidelines#Current_set_of_abbreviations).
