@@ -5,14 +5,28 @@ import { HoverProvider } from "./types";
 import { escape, table } from "./html";
 
 export class BugzillaHoverProvider implements HoverProvider {
-  private baseUrl: string;
-  private regexp: RegExp;
-  private tokenId: string;
+  private readonly baseUrl: string;
+  private readonly regexp: RegExp;
+  private readonly tokenId: string;
+  private readonly secretStorage: vscode.SecretStorage;
+  private token: string | undefined;
 
-  constructor(base: string, matcher: RegExp, config: string) {
+  constructor(base: string, matcher: RegExp, config: string, context: vscode.ExtensionContext) {
     this.baseUrl = base;
     this.regexp = matcher;
     this.tokenId = config;
+
+    this.secretStorage = context.secrets;
+    this.secretStorage.onDidChange((event) => {
+      if (event.key === this.tokenId) {
+        this.loadToken();
+      }
+    });
+    this.loadToken();
+  }
+
+  private loadToken(): void {
+    this.secretStorage.get(this.tokenId).then((secret) => (this.token = secret));
   }
 
   link(match: RegExpExecArray): string {
@@ -112,11 +126,13 @@ export class BugzillaHoverProvider implements HoverProvider {
       const failedRequest = responseBug.ok ? responseComments : responseBug;
       if (failedRequest.status === 401) {
         message.appendMarkdown(
-          this.apiToken()
+          this.token
             ? "Cannot read the data, the API token is probably not valid."
             : "You need to authenticate to the Bugzilla.  \nCreate a new [API access token]" +
                 `(${this.baseUrl}/userprefs.cgi?tab=apikey)` +
-                ` and add it to the [Bug ID extension settings](command:workbench.action.openSettings?%5B%22bug-id.${this.tokenId}%22%5D).`
+                ` and add it to the [Bug ID extension](command:bug-id.token.manager?${encodeURIComponent(
+                  JSON.stringify(this.tokenId)
+                )}).`
         );
         // to render the command link
         message.isTrusted = true;
@@ -131,15 +147,8 @@ export class BugzillaHoverProvider implements HoverProvider {
     return new vscode.Hover(message);
   }
 
-  private apiToken(): string | undefined {
-    const configuration = vscode.workspace.getConfiguration("bug-id");
-    return configuration.get<string>(this.tokenId);
-  }
-
   private createApiUrl(endPoint: string): string {
-    const token = this.apiToken();
     const url = this.baseUrl + "/rest/" + endPoint;
-
-    return token ? url + "?api_key=" + encodeURIComponent(token) : url;
+    return this.token ? url + "?api_key=" + encodeURIComponent(this.token) : url;
   }
 }

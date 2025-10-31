@@ -70,7 +70,7 @@ function registerCommands(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(disposable);
 
-  disposable = vscode.commands.registerCommand("bug-id.token.manager", () => selectToken(context));
+  disposable = vscode.commands.registerCommand("bug-id.token.manager", (key) => selectToken(context, key));
   context.subscriptions.push(disposable);
 
   disposable = vscode.commands.registerCommand("bug-id.suse.token.manager", () =>

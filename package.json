@@ -29,10 +29,6 @@
       {
         "command": "bug-id.token.manager",
         "title": "Bug ID: Manage API tokens"
-      },
-      {
-        "command": "bug-id.suse.token.manager",
-        "title": "Bug ID: Manage SUSE Bugzilla API token"
       }
     ]
   },
