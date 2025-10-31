@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { updateHovers } from "./lib/hover";
-import { allProviders } from "./lib/providers";
+import { allProviders, createProviders } from "./lib/providers";
 import { requestAuthentication } from "./lib/githubAuthentication";
 import { selectToken, setToken } from "./lib/tokenManager";
 
@@ -51,6 +51,7 @@ export function deactivate() {}
 
 // register all hover providers
 function registerProviders(context: vscode.ExtensionContext) {
+  createProviders(context);
   allProviders().forEach((provider) => {
     const disposable = vscode.languages.registerHoverProvider(
       // apply to all files

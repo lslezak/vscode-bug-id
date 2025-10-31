@@ -1,3 +1,5 @@
+import * as vscode from "vscode";
+
 import { BugzillaHoverProvider } from "./bugzillaHoverProvider";
 import { CveHoverProvider } from "./cveHoverProvider";
 import { GitHubHoverProvider } from "./githubHoverProvider";
@@ -6,12 +8,18 @@ import { ProgressHoverProvider } from "./progressHoverProvider";
 
 import { HoverProvider } from "./types";
 
+const providers: HoverProvider[] = [];
+
 export function allProviders(): HoverProvider[] {
-  return [
+  return providers;
+}
+
+export function createProviders(context: vscode.ExtensionContext) {
+  providers.push(
     new GitHubHoverProvider(),
     new ProgressHoverProvider(),
     new CveHoverProvider(),
-    new JiraHoverProvider(),
+    new JiraHoverProvider(context),
     // SUSE bugzilla
     new BugzillaHoverProvider(
       "https://bugzilla.suse.com",
@@ -61,5 +69,5 @@ export function allProviders(): HoverProvider[] {
       /\brh#([0-9]+)\b/g,
       "bugzilla.redhat.token"
     ),
-  ];
+  );
 }

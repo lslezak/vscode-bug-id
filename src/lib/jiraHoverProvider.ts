@@ -5,7 +5,25 @@ import { HoverProvider } from "./types";
 import { escape, table } from "./html";
 
 export class JiraHoverProvider implements HoverProvider {
+  constructor(context: vscode.ExtensionContext) {
+    this.secretStorage = context.secrets;
+    this.secretStorage.onDidChange((event) => {
+      if (event.key === this.key) {
+        this.loadToken();
+      }
+    });
+    this.loadToken();
+  }
+
   private readonly regexp = /\bjsc#(\S+)\b/gi;
+  private readonly key = "token.jira.suse";
+
+  private secretStorage: vscode.SecretStorage;
+  private token: string | undefined;
+
+  private loadToken(): void {
+    this.secretStorage.get(this.key).then((secret) => (this.token = secret));
+  }
 
   regExp(): RegExp {
     return this.regexp;
@@ -22,8 +40,7 @@ export class JiraHoverProvider implements HoverProvider {
   ): Promise<vscode.Hover | null> {
     const range = document.getWordRangeAtPosition(position, this.regexp);
 
-    const apiToken = this.apiToken();
-    if (!this.apiToken()) {
+    if (!this.token) {
       const message = new vscode.MarkdownString();
       message.appendMarkdown(
         "You need to authenticate to the Jira.  \nCreate a new [API access token]" +
@@ -40,7 +57,7 @@ export class JiraHoverProvider implements HoverProvider {
       const match = this.regexp.exec(word);
       if (match) {
         const response = await fetch(`https://jira.suse.com/rest/api/2/issue/${match[1]}`, {
-          headers: { Authorization: "Bearer " + apiToken },
+          headers: { Authorization: "Bearer " + this.token },
         });
         return this.createHoverMessage(response);
       }
@@ -123,7 +140,7 @@ export class JiraHoverProvider implements HoverProvider {
     } else {
       if (response.status === 401) {
         message.appendMarkdown(
-          this.apiToken()
+          this.token
             ? "Cannot read the data, the API token is probably not valid."
             : "You need to authenticate to the Jira.  \nCreate a new [API access token]" +
                 "(https://jira.suse.com/secure/ViewProfile.jspa?selectedTab=com.atlassian.pats.pats-plugin:jira-user-personal-access-tokens)" +
@@ -140,11 +157,6 @@ export class JiraHoverProvider implements HoverProvider {
     }
 
     return new vscode.Hover(message);
-  }
-
-  private apiToken(): string | undefined {
-    const configuration = vscode.workspace.getConfiguration("bug-id");
-    return configuration.get<string>("jira.token");
   }
 
   private formatEmail(email: string): string {
