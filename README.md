@@ -13,7 +13,7 @@ identifier.
 - Highlighting of the bug IDs in the text (underlined).
 - Displays a tooltip with bug details and a link pointing to the bug
   tracking system to see more details.
-- It works in all files, documentation, source code, change log...
+- It works in all files, documentation, source code, change logs...
 
 ## Supported bug identifiers
 
@@ -38,7 +38,7 @@ openSUSE](https://en.opensuse.org/openSUSE:Packaging_Patches_guidelines#Current_
 ## Authentication
 
 Some systems or bugs can be accessed anonymously without any authentication.
-However, authentication might increase the allowed request rate limit.
+However, authentication might still increase the allowed request rate limit.
 
 ### GitHub
 
@@ -46,8 +46,8 @@ Anonymous access to GitHub API allows 60 requests per hour. Limit for the
 authenticated requests is 5000 requests per hour.
 
 To authenticate to GitHub click the "Sign in to GitHub" link displayed in the
-warning message displayed when reaching the limit for anonymous requests. Or you
-can authenticate anytime by opening the command palette (`Ctrl+Shift+P`) and
+warning message displayed when reaching the limit for the anonymous requests. Or
+you can authenticate anytime by opening the command palette (`Ctrl+Shift+P`) and
 selecting the "*Bug ID: Request GitHub authentication*" command. When asked
 confirm the access to GitHub for the extension.
 
@@ -75,23 +75,24 @@ the extension settings click the displayed links for a Jira issue identifier.
 Alternatively open your user profile page in Jira and select the "*Personal
 Access Tokens*" item in the left menu and then click the "*Create token*" button
 in the top right corner. Then open the command palette (`Ctrl+Shift+P`) and
-select the "*"Bug ID: Manage API tokens*" command. Then select the "SUSE Jira"
+select the "*"Bug ID: Manage API tokens*" command. Then select the "*SUSE Jira*"
 entry in the list and enter the API key.
 
 ### NIST CVE
 
 Anonymous access allows 5 requests during 30 seconds. Authenticated access is
-not supported.
+not implemented.
 
 ## Storing the API tokens
 
 The API tokens are stored in the VSCode using the
 [SecretStorage](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#data-storage).
 That means the tokens are stored in encrypted form and are not synchronized
-across machines. So you have to repeat the token configuration on every machine.
+across machines. So you have to repeat the token configuration on every machine
+you use.
 
-In Linux it uses the GNOME keyring or KDE kwallet as the storage backend. See
-more details in the [VSCode
+In Linux it uses the GNOME keyring or the KDE kwallet as the storage backend.
+See more details in the [VSCode
 documentation](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#data-storage)
 if you have some troubles with this.
 
@@ -99,7 +100,7 @@ if you have some troubles with this.
 
 ![API token manager](media/screenshots/token-manager.png)
 
-The token manager manages the stored API token used for authentication in the
+The token manager manages the stored API authentication tokens for various
 bug tracking systems. Open the command palette (`Ctrl+Shift+P`) and select the
 "*Bug ID: Manage API tokens*" command to start the token manager.
 

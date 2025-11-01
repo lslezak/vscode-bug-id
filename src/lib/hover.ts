@@ -2,10 +2,6 @@ import * as vscode from "vscode";
 
 import { allProviders } from "./providers";
 
-// const channel = vscode.window.createOutputChannel("My channel");
-// channel.show();
-// channel.appendLine("Hello!");
-
 const decorationType = vscode.window.createTextEditorDecorationType({
   borderStyle: "none none solid none",
   borderWidth: "1px",

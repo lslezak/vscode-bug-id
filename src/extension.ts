@@ -4,8 +4,7 @@ import { allProviders, createProviders } from "./lib/providers";
 import { requestAuthentication } from "./lib/githubAuthentication";
 import { selectToken, setToken } from "./lib/tokenManager";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+// activating the extension
 export function activate(context: vscode.ExtensionContext) {
   let activeEditor = vscode.window.activeTextEditor;
   // delay updating the diagnostics if the document is changing too quickly
@@ -62,7 +61,7 @@ function registerProviders(context: vscode.ExtensionContext) {
   });
 }
 
-// register the GitHub authentication command
+// register the commands
 function registerCommands(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     "bug-id.authenticate.github",
@@ -70,7 +69,9 @@ function registerCommands(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(disposable);
 
-  disposable = vscode.commands.registerCommand("bug-id.token.manager", (key) => selectToken(context, key));
+  disposable = vscode.commands.registerCommand("bug-id.token.manager", (key) =>
+    selectToken(context, key)
+  );
   context.subscriptions.push(disposable);
 
   disposable = vscode.commands.registerCommand("bug-id.suse.token.manager", () =>

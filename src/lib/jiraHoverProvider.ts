@@ -45,7 +45,7 @@ export class JiraHoverProvider implements HoverProvider {
       message.appendMarkdown(
         "You need to authenticate to the Jira.  \nCreate a new [API access token]" +
           "(https://jira.suse.com/secure/ViewProfile.jspa?selectedTab=com.atlassian.pats.pats-plugin:jira-user-personal-access-tokens)" +
-          ` and add it to the [Bug ID extension](command:command:bug-id.token.manager?${encodeURIComponent(
+          ` and add it to the [Bug ID extension](command:bug-id.token.manager?${encodeURIComponent(
             JSON.stringify(this.key)
           )}).`
       );
@@ -146,7 +146,9 @@ export class JiraHoverProvider implements HoverProvider {
             ? "Cannot read the data, the API token is probably not valid."
             : "You need to authenticate to the Jira.  \nCreate a new [API access token]" +
                 "(https://jira.suse.com/secure/ViewProfile.jspa?selectedTab=com.atlassian.pats.pats-plugin:jira-user-personal-access-tokens)" +
-                " and add it to the [Bug ID extension settings](command:workbench.action.openSettings?%5B%22bug-id.jira.token%22%5D)."
+                ` and add it to the [Bug ID extension](command:bug-id.token.manager?${encodeURIComponent(
+                  JSON.stringify(this.key)
+                )}).`
         );
         message.isTrusted = true;
       } else if (response.status === 403) {
