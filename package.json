@@ -1,7 +1,7 @@
 {
   "name": "bug-id",
   "displayName": "Bug ID",
-  "description": "Show details about bug IDs",
+  "description": "Show details about bug IDs in a preview",
   "version": "0.0.1",
   "repository": {
     "type": "git",

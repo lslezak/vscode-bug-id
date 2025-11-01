@@ -6,6 +6,8 @@ Code](https://code.visualstudio.com/) (VSCode) IDE.
 It shows bug details when placing the mouse cursor over a bug
 identifier.
 
+![Showing a bug details in a preview](media/screenshots/bug-preview.png)
+
 ## Features
 
 - Highlighting of the bug IDs in the text (underlined).
@@ -88,12 +90,24 @@ The API tokens are stored in the VSCode using the
 That means the tokens are stored in encrypted form and are not synchronized
 across machines. So you have to repeat the token configuration on every machine.
 
-As a storage backend it uses GNOME keyring or KDE kwallet. See more details in
-the [VSCode
+In Linux it uses the GNOME keyring or KDE kwallet as the storage backend. See
+more details in the [VSCode
 documentation](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#data-storage)
 if you have some troubles with this.
 
 ### Token manager
 
-Open the command palette (`Ctrl+Shift+P`) and select the "*"Bug ID: Manage API
-tokens*" command.
+![API token manager](media/screenshots/token-manager.png)
+
+The token manager manages the stored API token used for authentication in the
+bug tracking systems. Open the command palette (`Ctrl+Shift+P`) and select the
+"*Bug ID: Manage API tokens*" command to start the token manager.
+
+Select a bug tracking system in the list to add or edit its API token. If you
+want to delete an API token then use an empty value. To delete all stored API
+tokens select the "*Delete all API tokens*" option.
+
+> [!NOTE]  
+> Before uninstalling the extension it is recommended to delete all stored API
+> keys. If you do not use the API keys elsewhere then it is also recommended to
+> revoke or delete them in the respective systems.
