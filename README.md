@@ -61,8 +61,9 @@ displayed links for a Bugzilla identifier.
 
 Or go to the Bugzilla preferences page, click your account name at the top of
 the page and select the "*Preferences*" option. Switch to the "*API KEYS*" tab
-and create a new API key. Then go to the extension settings (see below) and
-paste the created API key to the appropriate Bugzilla system setting.
+and create a new API key. Then open the command palette (`Ctrl+Shift+P`) and
+select the "*"Bug ID: Manage API tokens*" command. Then select the appropriate
+Bugzilla instance in the list and enter the API key.
 
 ### SUSE Jira
 
@@ -71,16 +72,28 @@ the extension settings click the displayed links for a Jira issue identifier.
 
 Alternatively open your user profile page in Jira and select the "*Personal
 Access Tokens*" item in the left menu and then click the "*Create token*" button
-in the top right corner. Then go to the extension settings (see below) and paste
-the created API key into the Jira setting.
+in the top right corner. Then open the command palette (`Ctrl+Shift+P`) and
+select the "*"Bug ID: Manage API tokens*" command. Then select the "SUSE Jira"
+entry in the list and enter the API key.
 
 ### NIST CVE
 
 Anonymous access allows 5 requests during 30 seconds. Authenticated access is
 not supported.
 
-## Extension Settings
+## Storing the API tokens
 
-The API tokens are stored in the extension settings. To display and the
-extension settings open the VSCode setting panel (`Ctrl+,`) and navigate to the
-`Extensions -> Bug ID` section.
+The API tokens are stored in the VSCode using the
+[SecretStorage](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#data-storage).
+That means the tokens are stored in encrypted form and are not synchronized
+across machines. So you have to repeat the token configuration on every machine.
+
+As a storage backend it uses GNOME keyring or KDE kwallet. See more details in
+the [VSCode
+documentation](https://code.visualstudio.com/api/extension-capabilities/common-capabilities#data-storage)
+if you have some troubles with this.
+
+### Token manager
+
+Open the command palette (`Ctrl+Shift+P`) and select the "*"Bug ID: Manage API
+tokens*" command.
