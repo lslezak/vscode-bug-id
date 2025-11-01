@@ -45,6 +45,7 @@
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src/",
+    "prettier": "prettier --write .",
     "test": "vscode-test"
   },
   "devDependencies": {
@@ -61,6 +62,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "date-fns": "^2.30.0"
+    "date-fns": "^2.30.0",
+    "prettier": "^3.6.2"
   }
 }

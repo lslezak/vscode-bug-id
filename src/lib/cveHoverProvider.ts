@@ -96,7 +96,6 @@ export class CveHoverProvider implements HoverProvider {
           });
           message.appendMarkdown(`#### Weaknesses\n\n${wList}\n`);
         }
-
       }
     } else {
       if (response.status === 401) {

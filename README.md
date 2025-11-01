@@ -48,7 +48,7 @@ authenticated requests is 5000 requests per hour.
 To authenticate to GitHub click the "Sign in to GitHub" link displayed in the
 warning message displayed when reaching the limit for the anonymous requests. Or
 you can authenticate anytime by opening the command palette (`Ctrl+Shift+P`) and
-selecting the "*Bug ID: Request GitHub authentication*" command. When asked
+selecting the "_Bug ID: Request GitHub authentication_" command. When asked
 confirm the access to GitHub for the extension.
 
 ### Bugzilla
@@ -62,9 +62,9 @@ To create an API key and import it to the extension settings just click the
 displayed links for a Bugzilla identifier.
 
 Or go to the Bugzilla preferences page, click your account name at the top of
-the page and select the "*Preferences*" option. Switch to the "*API KEYS*" tab
+the page and select the "_Preferences_" option. Switch to the "_API KEYS_" tab
 and create a new API key. Then open the command palette (`Ctrl+Shift+P`) and
-select the "*"Bug ID: Manage API tokens*" command. Then select the appropriate
+select the "_Bug ID: Manage API tokens_" command. Then select the appropriate
 Bugzilla instance in the list and enter the API key.
 
 ### SUSE Jira
@@ -72,10 +72,10 @@ Bugzilla instance in the list and enter the API key.
 SUSE Jira requires authenticated access. To create an API key and import it to
 the extension settings click the displayed links for a Jira issue identifier.
 
-Alternatively open your user profile page in Jira and select the "*Personal
-Access Tokens*" item in the left menu and then click the "*Create token*" button
+Alternatively open your user profile page in Jira and select the "_Personal
+Access Tokens_" item in the left menu and then click the "_Create token_" button
 in the top right corner. Then open the command palette (`Ctrl+Shift+P`) and
-select the "*"Bug ID: Manage API tokens*" command. Then select the "*SUSE Jira*"
+select the "_Bug ID: Manage API tokens_" command. Then select the "_SUSE Jira_"
 entry in the list and enter the API key.
 
 ### NIST CVE
@@ -102,11 +102,11 @@ if you have some troubles with this.
 
 The token manager manages the stored API authentication tokens for various
 bug tracking systems. Open the command palette (`Ctrl+Shift+P`) and select the
-"*Bug ID: Manage API tokens*" command to start the token manager.
+"_Bug ID: Manage API tokens_" command to start the token manager.
 
 Select a bug tracking system in the list to add or edit its API token. If you
 want to delete an API token then use an empty value. To delete all stored API
-tokens select the "*Delete all API tokens*" option.
+tokens select the "_Delete all API tokens_" option.
 
 > [!NOTE]  
 > Before uninstalling the extension it is recommended to delete all stored API

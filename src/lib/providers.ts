@@ -76,6 +76,6 @@ export function createProviders(context: vscode.ExtensionContext) {
       /\brh#([0-9]+)\b/g,
       "bugzilla.redhat.token",
       context
-    ),
+    )
   );
 }

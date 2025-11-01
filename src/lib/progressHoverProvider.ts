@@ -69,10 +69,7 @@ export class ProgressHoverProvider implements HoverProvider {
       ];
 
       if (issue.assigned_to) {
-        tableData.push([
-          "Assigned to:",
-          escape(issue.assigned_to.name || "")
-        ]);
+        tableData.push(["Assigned to:", escape(issue.assigned_to.name || "")]);
       }
 
       if (issue.closed_on) {
