@@ -2,7 +2,7 @@
   "name": "bug-id",
   "displayName": "Bug ID",
   "description": "Show details about bug IDs in a preview",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/lslezak/vscode-bug-id.git"
