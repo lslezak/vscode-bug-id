@@ -1,3 +1,5 @@
+// some HTML helpers
+
 // escape HTML characters
 export function escape(text: string): string {
   if (!text) {

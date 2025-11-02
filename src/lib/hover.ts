@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 
 import { allProviders } from "./providers";
 
+// define the decoration for the matched identifiers
 const decorationType = vscode.window.createTextEditorDecorationType({
   borderStyle: "none none solid none",
   borderWidth: "1px",

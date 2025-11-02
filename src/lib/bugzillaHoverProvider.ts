@@ -148,6 +148,9 @@ export class BugzillaHoverProvider implements HoverProvider {
   }
 
   private createApiUrl(endPoint: string): string {
+    // newer bugzilla allows sending the API key in request body, unfortunately the deployed
+    // instances usually run older versions :-/
+    // https://bugzilla.readthedocs.io/en/5.2/api/core/v1/general.html#authentication
     const url = this.baseUrl + "/rest/" + endPoint;
     return this.token ? url + "?api_key=" + encodeURIComponent(this.token) : url;
   }

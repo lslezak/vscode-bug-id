@@ -1,5 +1,7 @@
 import * as vscode from "vscode";
 
+// manage the stored API tokens
+
 const providers = [
   {
     label: "Bug tracking systems",
@@ -7,6 +9,7 @@ const providers = [
   },
   {
     // $(bug) is icon name, see https://microsoft.github.io/vscode-codicons/dist/codicon.html
+    // or https://code.visualstudio.com/api/references/icons-in-labels
     label: "$(bug) GCC Bugzilla",
     name: "GCC Bugzilla",
     description: "https://gcc.gnu.org/bugzilla",
