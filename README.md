@@ -51,6 +51,10 @@ you can authenticate anytime by opening the command palette (`Ctrl+Shift+P`) and
 selecting the "_Bug ID: Request GitHub authentication_" command. When asked
 confirm the access to GitHub for the extension.
 
+The extension requests read only access for all public data, but it still works
+even without that, the authentication is only needed to increase the API request
+rate limit.
+
 ### Bugzilla
 
 Bugzilla systems in general allow anonymous access, but some bug reports require
@@ -110,11 +114,10 @@ Select a bug tracking system in the list to add or edit its API token. If you
 want to delete an API token then use an empty value. To delete all stored API
 tokens select the "_Delete all API tokens_" option.
 
-⚠️ _Note: Although the API tokens are stored securely you should still be
+_Although the API tokens are stored securely you should still be
 careful which applications or extensions you install on your machine. A
-malicious app could still access any stored data on your machine._ ⚠️
+malicious app could still access any stored data on your machine._
 
-> [!NOTE]  
 > Before uninstalling the extension it is recommended to delete all stored API
 > keys. If you do not use the API keys elsewhere then it is also recommended to
 > revoke or delete them in the respective systems.
