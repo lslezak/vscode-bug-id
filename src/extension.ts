@@ -73,9 +73,4 @@ function registerCommands(context: vscode.ExtensionContext) {
     selectToken(context, key)
   );
   context.subscriptions.push(disposable);
-
-  disposable = vscode.commands.registerCommand("bug-id.suse.token.manager", () =>
-    setToken("SUSE Bugzilla", "suse.token", context)
-  );
-  context.subscriptions.push(disposable);
 }
