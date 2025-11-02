@@ -58,8 +58,10 @@ authentication. And some bugs might be accessible only to specific persons or
 teams. For example the security bugs might be accessible only to the security
 team.
 
+![tooltip with missing API token](media/screenshots/bug-missing-token.png)
+
 To create an API key and import it to the extension settings just click the
-displayed links for a Bugzilla identifier.
+displayed links in a tooltip for a Bugzilla identifier.
 
 Or go to the Bugzilla preferences page, click your account name at the top of
 the page and select the "_Preferences_" option. Switch to the "_API KEYS_" tab
@@ -107,6 +109,10 @@ bug tracking systems. Open the command palette (`Ctrl+Shift+P`) and select the
 Select a bug tracking system in the list to add or edit its API token. If you
 want to delete an API token then use an empty value. To delete all stored API
 tokens select the "_Delete all API tokens_" option.
+
+⚠️ _Note: Although the API tokens are stored securely you should still be
+careful which applications or extensions you install on your machine. A
+malicious app could still access any stored data on your machine._ ⚠️
 
 > [!NOTE]  
 > Before uninstalling the extension it is recommended to delete all stored API
