@@ -40,23 +40,24 @@ export class JiraHoverProvider implements HoverProvider {
   ): Promise<vscode.Hover | null> {
     const range = document.getWordRangeAtPosition(position, this.regexp);
 
-    if (!this.token) {
-      const message = new vscode.MarkdownString();
-      message.appendMarkdown(
-        "You need to authenticate to the Jira.  \nCreate a new [API access token]" +
-          "(https://jira.suse.com/secure/ViewProfile.jspa?selectedTab=com.atlassian.pats.pats-plugin:jira-user-personal-access-tokens)" +
-          ` and add it to the [Bug ID extension](command:bug-id.token.manager?${encodeURIComponent(
-            JSON.stringify(this.key)
-          )}).`
-      );
-      // to render the command link
-      message.isTrusted = true;
-      return new vscode.Hover(message);
-    }
-
     if (range) {
+      if (!this.token) {
+        const message = new vscode.MarkdownString();
+        message.appendMarkdown(
+          "You need to authenticate to the Jira.  \nCreate a new [API access token]" +
+            "(https://jira.suse.com/secure/ViewProfile.jspa?selectedTab=com.atlassian.pats.pats-plugin:jira-user-personal-access-tokens)" +
+            ` and add it to the [Bug ID extension](command:bug-id.token.manager?${encodeURIComponent(
+              JSON.stringify(this.key)
+            )}).`
+        );
+        // to render the command link
+        message.isTrusted = true;
+        return new vscode.Hover(message);
+      }
+
       const word = document.getText(range);
       const match = this.regexp.exec(word);
+
       if (match) {
         const response = await fetch(`https://jira.suse.com/rest/api/2/issue/${match[1]}`, {
           headers: { Authorization: "Bearer " + this.token },
